@@ -1,8 +1,8 @@
 <template>
   <div class="sharePoster">
       <open-data type="userAvatarUrl" class="avatar"></open-data>
-      <canvas type="2d" id="myCanvas"></canvas>
-      <!-- <button @click="createPic">生成我的名片</button> -->
+      <!-- <canvas type="2d" id="myCanvas"></canvas> -->
+      <button @click="createPic">生成我的名片</button>
   </div>
 </template>
 <script>
@@ -17,20 +17,9 @@ export default {
         avatarUrl: 'https://iconfont.alicdn.com/t/6489d7d0-58ea-4de2-8c5c-066c4d7a2361.png'
     }
   },
-    onReady() {
-      const query = wx.createSelectorQuery()
-      query.select('#myCanvas')
-        .fields({ node: true, size: true })
-        .exec(async (res) => {
-            const canvas = res[0].node
-            const bgImg = await this.getImg(canvas, this.bgUrl)
-            const avatarImg = await this.getImgObj(canvas, this.avatarUrl)
-            const ctx = canvas.getContext('2d')
-            ctx.drawImage(bgImg, 0, 0, 300, 300) // 相较于旧版本的API 这里的bgImg不可以是个图片路径 而是图片对象
-            ctx.drawImage(avatarImg, 50, 50, 100, 100)
-            // 绘制文本 姓名和个性签名
-            ctx.draw()
-        })
+  onReady() {
+      // this.init2Dcanvas()
+      // 先使用原生组件形式，不使用同层渲染
   },
   methods: {
       downLoadNetPicture(url) {
@@ -66,6 +55,9 @@ export default {
                 })
           })
       },
+      getRpx() {
+          return wx.getSystemInfoSync().windowWidth / 750
+      },
       drawImage() {
           // 创建canvas画笔
           // 绘制背景图
@@ -74,6 +66,24 @@ export default {
           // 绘制个性签名
           // 绘制小程序码 扫码跳转到小程序主页
           // 绘制成图片，显示在页面中，同时将图片保存到本地
+      },
+      init2Dcanvas() {
+      const rpx = this.getRpx()
+      const query = wx.createSelectorQuery()
+      query.select('#myCanvas')
+        .fields({ node: true, size: true })
+        .exec(async (res) => {
+            const canvas = res[0].node
+            const bgImg = await this.getImg(canvas, this.bgUrl)
+            const avatarImg = await this.getImgObj(canvas, this.avatarUrl)
+            const ctx = canvas.getContext('2d')
+            ctx.drawImage(bgImg, 0, 0, 500 * rpx, 500 * rpx) // 相较于旧版本的API 这里的bgImg不可以是个图片路径 而是图片对象
+            // ctx.drawImage(avatarImg, 100, 100, 100, 100)
+            // 绘制文本 姓名和个性签名
+            ctx.font = '24px Arial';
+            // ctx.fillText('Frank', 150, 100)
+            ctx.draw()
+        })
       }
   }
 }
@@ -94,8 +104,10 @@ export default {
     border-radius: 50%;
     overflow: hidden;
 }
-.myCanvas {
-    width: 100%;
-    height: 300rpx;
+#myCanvas {
+    width: 500rpx;
+    height: 500rpx;
+    border: 1rpx solid black;
+    display: none;
 }
 </style>

@@ -4,6 +4,11 @@
             "name": "名片",
             "path": "/pages/sharePoster/main",
             "icon": "https://frank-1302698468.cos.ap-beijing.myqcloud.com/KM/icons/%E5%B7%A5%E7%A8%8B%E7%BB%98%E5%9B%BE.png"
+        },
+        {
+            "name": "分享",
+            "path": "/pages/shareDemo/main",
+            "icon": "https://frank-1302698468.cos.ap-beijing.myqcloud.com/KM/icons/share-icon.png"
         }
     ]
 }

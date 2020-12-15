@@ -4,7 +4,8 @@
     "pages/counter/main",
     "pages/webView/main",
     "pages/appEntry/main",
-    "pages/sharePoster/main"
+    "pages/sharePoster/main",
+    "pages/shareDemo/main"
   ],
   "window": {
     "backgroundTextStyle": "light",

@@ -35,11 +35,12 @@ export default {
 .appEntry .item{
   width: 150rpx;
   padding: 20rpx;
-  display: flex;
+  display: inline-flex;
   flex-direction: column;
   align-items: center;
   border: 2rpx solid#E4E7ED;
   border-radius: 10rpx;
+  margin: 10rpx;
   box-shadow: 0 2rpx 4rpx rgba(0, 0, 0, .12), 0 0 6rpx rgba(0, 0, 0, .04)
 }
 .item .icon {
