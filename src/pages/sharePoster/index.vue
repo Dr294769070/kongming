@@ -1,8 +1,9 @@
 <template>
   <div class="sharePoster">
-      <open-data type="userAvatarUrl" class="avatar"></open-data>
+      <!-- <open-data type="userAvatarUrl" class="avatar"></open-data> -->
       <!-- <canvas type="2d" id="myCanvas"></canvas> -->
-      <button @click="createPic">生成我的名片</button>
+      <!-- <button @click="createPic">生成我的名片</button> -->
+      <canvas canvas-id="myCanvas"></canvas>
   </div>
 </template>
 <script>
@@ -20,8 +21,19 @@ export default {
   onReady() {
       // this.init2Dcanvas()
       // 先使用原生组件形式，不使用同层渲染
+      this.initNativeCanvas()
   },
   methods: {
+      async initNativeCanvas() {
+          // 初始化native canvas
+          const rpx = this.getRpx()
+          const ctx = wx.createCanvasContext('myCanvas');
+          ctx.width = 400 * rpx
+          ctx.height = 300 * rpx
+          const bgImg = await this.downLoadNetPicture(this.bgUrl)
+          ctx.drawImage(bgImg, 0, 0, ctx.width, ctx.height)
+          ctx.draw()
+      },
       downLoadNetPicture(url) {
           const promise = new Promise((resolve, reject) => {
               wx.downloadFile({
@@ -56,7 +68,7 @@ export default {
           })
       },
       getRpx() {
-          return wx.getSystemInfoSync().windowWidth / 750
+          return wx.getSystemInfoSync().windowWidth / 375
       },
       drawImage() {
           // 创建canvas画笔

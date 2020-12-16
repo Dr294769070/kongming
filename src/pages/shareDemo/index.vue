@@ -1,7 +1,7 @@
 <template>
   <div class="sharePage">
+      <i-button open-type="share" type="primary">分享</i-button>
       <div class="text">分享页面</div>
-      <button open-type="share">分享</button>
   </div>
 </template>
 <script>
@@ -26,6 +26,7 @@ export default {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    height: 100vh;
 }
 .sharePage .text{
     line-height: 50rpx;
