@@ -31,6 +31,10 @@ export default {
 .appEntry{
   box-sizing: border-box;
   padding: 20rpx;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
 }
 .appEntry .item{
   width: 150rpx;

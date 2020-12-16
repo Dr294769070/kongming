@@ -9,6 +9,11 @@
             "name": "分享",
             "path": "/pages/shareDemo/main",
             "icon": "https://frank-1302698468.cos.ap-beijing.myqcloud.com/KM/icons/share-icon.png"
+        },
+        {
+            "name": "引导",
+            "path": "/pages/guideDemo/main",
+            "icon": "https://frank-1302698468.cos.ap-beijing.myqcloud.com/KM/icons/%E6%99%BA%E8%83%BD%E5%BC%95%E5%AF%BC.png"
         }
     ]
 }

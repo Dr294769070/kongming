@@ -5,7 +5,8 @@
     "pages/webView/main",
     "pages/appEntry/main",
     "pages/sharePoster/main",
-    "pages/shareDemo/main"
+    "pages/shareDemo/main",
+    "pages/guideDemo/main"
   ],
   "window": {
     "backgroundTextStyle": "light",
