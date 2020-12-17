@@ -9,6 +9,11 @@
             "name": "分享",
             "path": "/pages/shareDemo/main",
             "icon": "https://frank-1302698468.cos.ap-beijing.myqcloud.com/KM/icons/share-icon.png"
+        },
+        {
+            "name": "天气",
+            "path": "/pages/apps/weather/main",
+            "icon": "https://frank-1302698468.cos.ap-beijing.myqcloud.com/KM/icons/%E5%A4%A9%E6%B0%94.png"
         }
     ]
 }
