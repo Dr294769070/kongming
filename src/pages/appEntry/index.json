@@ -14,6 +14,11 @@
             "name": "引导",
             "path": "/pages/guideDemo/main",
             "icon": "https://frank-1302698468.cos.ap-beijing.myqcloud.com/KM/icons/%E6%99%BA%E8%83%BD%E5%BC%95%E5%AF%BC.png"
+        },
+        {
+            "name": "天气",
+            "path": "/pages/apps/weather/main",
+            "icon": "https://frank-1302698468.cos.ap-beijing.myqcloud.com/KM/icons/%E5%A4%A9%E6%B0%94.png"
         }
     ]
 }
