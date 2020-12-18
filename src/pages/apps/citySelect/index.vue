@@ -2,8 +2,8 @@
     <div class="citySelect">
         <div class="selCity">热门城市</div>
         <div class="cityList">
-            <div class="city" v-for="(item, index) in cityList" :key="index">
-                <i-button inline size="small" type="ghost">{{ item.name }}</i-button>
+            <div class="city" v-for="(item, index) in cityList" :key="index" @click="setLocation(item)">
+                <i-button inline size="small" type="ghost">{{ item.city }}</i-button>
             </div>
         </div>
     </div>
@@ -15,15 +15,26 @@ export default {
             city: '',
             cityList: [
                 {
-                    name: "北京"
+                    city: "北京",
+                    adCode: '110000'
                 },
                 {
-                    name: "杭州"
+                    city: "杭州",
+                    adCode: '330100'
                 },
                 {
-                    name: "怀宁"
+                    city: "怀宁",
+                    adCode: '340822'
                 }
             ]
+        }
+    },
+    methods: {
+        setLocation(item) {
+            wx.setStorageSync('locationMap', item)
+            wx.navigateTo({
+                url: '/pages/apps/weather/main'
+            })
         }
     }
 }

@@ -1,36 +1,48 @@
 <template>
     <div class="weather">
-        <location @getLocationSuc="handleLocation"></location>
-        <div v-show="address" class="position">
+        <div class="position" @click="toCitySelect">
             <img src="https://frank-1302698468.cos.ap-beijing.myqcloud.com/KM/icons/%E5%AE%9A%E4%BD%8D.png" class="pos-icon" />
-            <div class="city">{{ city }}</div>
+            <div class="city">{{ locationMap.city }}</div>
         </div>
         <div v-if="weatherMap.weather" class="weatherDetail">
             <div class="text temperature">{{ weatherMap.temperature }}</div>
             <div class="text">{{ weatherMap.weather }}</div>
             <div class="text">{{ weatherMap.winddirection + weatherMap.windpower + '级' }}</div>
         </div>
+        <div class="echarts-container">
+            <mpvue-echarts :echarts="echarts" :onInit="echartsInit" lazyLoad canvasId="weatherLine" ref="weatherLine"/>
+        </div>
         <!-- 未来的天气预报 -->
     </div>
 </template>
 <script>
-import location from './components/location'
+// ECHARTS
+import * as echarts from 'echarts/dist/echarts.min'
+// import * as echarts from '../../../scripts/echarts.min'
+import mpvueEcharts from "mpvue-echarts";
+
 import API from '../../../api/api-map'
 
 export default {
     components: {
-        location
+        mpvueEcharts
     },
     data() {
         return {
             city: '',
             address: '',
             adCode: '',
-            weatherMap: {}
+            weatherMap: {},
+            locationMap: {},
+            echarts,
+            option: {}
         }
     },
-    onLoad() {
+    onUnload() {
+    },
+    onShow() {
         this.weatherMap = {}
+        this.getCity()
     },
     methods: {
         async handleLocation(locationMap) {
@@ -48,10 +60,83 @@ export default {
             this.weatherMap = res2.data.lives[0]
         },
 
-        queryWeather() {
+        queryWeather(extensions) {
             return API.queryWeather({
-                city: this.adCode
+                city: this.locationMap.adCode,
+                extensions
             })
+        },
+        toCitySelect() {
+            wx.navigateTo({
+                url: '/pages/apps/citySelect/main'
+            })
+        },
+        getCity() {
+            const locationMap = wx.getStorageSync('locationMap')
+            console.log('location', locationMap)
+            if (!locationMap) {
+                this.toCitySelect()
+            } else {
+                this.locationMap = locationMap
+                this.getWeatherInfo()
+            }
+        },
+        getWeatherInfo() {
+            const promiseArr = [this.queryWeather('base'), this.queryWeather('all')]
+            Promise.all(promiseArr).then(res => {
+                console.log('res', res)
+                this.weatherMap = res[0].data.lives[0]
+                const casts = res[1].data.forecasts[0].casts
+                const map = {
+                    1: '周一',
+                    2: '周二',
+                    3: '周三',
+                    4: '周四',
+                    5: '周五',
+                    6: '周六',
+                    7: '周日'
+                }
+                const xAxisData = casts.map(item => map[item.week])
+                const daypowerData = casts.map(item => item.daypower.match(/-?[\d+]/g)[0])
+                const nighttempData = casts.map(item => item.nighttemp.match(/-?[\d+]/g)[0])
+                this.option = {
+                    legend: {
+                        data: ['最高气温', '最低气温']
+                    },
+                    tooltip: {
+                        trigger: 'axis'
+                    },
+                    xAxis: {
+                        type: 'category',
+                        data: xAxisData
+                    },
+                    yAxis: {
+                        name: '气温',
+                        type: 'value'
+                    },
+                    series: [{
+                        data: daypowerData,
+                        type: 'line',
+                        stack: '总量',
+                        name: '最高气温'
+                    }, {
+                        data: nighttempData,
+                        type: 'line',
+                        stack: '总量',
+                        name: '最底气温'
+                    }]
+                }
+                this.$refs.weatherLine && this.$refs.weatherLine.init()
+            })
+        },
+        echartsInit(canvas, width, height) {
+            const example = echarts.init(canvas, null, {
+                width,
+                height
+            });
+            canvas.setChart(example);
+            example.setOption(this.option);
+            return example;
         }
     }
 }
@@ -59,18 +144,32 @@ export default {
 <style scoped>
 .weather{
     height: 100vh;
-    background: linear-gradient(rgb(79, 138, 179), rgb(122, 168, 200));
+    background: linear-gradient(rgb(84, 146, 190), rgb(122, 168, 200));
 }
 .weather .weatherDetail{
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
+    margin-bottom: 20rpx;
 }
 .weather .weatherDetail .temperature{
     height: 200rpx;
     line-height: 200rpx;
     font-size: 160rpx;
+    display: inline-block;
+    position: relative;
+    /* 如果伪元素要用absolute定位，则这里要设置relative */
+}
+.temperature::after{
+    content: '';
+    position: absolute;
+    top: 30rpx;
+    display: inline-block;
+    width: 14rpx;
+    height: 14rpx;
+    border: 4rpx solid white;
+    border-radius: 50%;
 }
 .weather .position{
     height: 80rpx;
@@ -103,5 +202,12 @@ export default {
     text-align: center;
     width: 100%;
     text-align: center;
+}
+.echarts-container{
+    width: 700rpx;
+    margin: 0 auto; 
+    height: 464rpx;
+    border-radius: 10rpx;
+    background: #fff;
 }
 </style>

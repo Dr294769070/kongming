@@ -1,5 +1,8 @@
 {
     "usingComponents": {
         "i-button": "../../../static/iView/button/index"
-    }
+    },
+    "navigationBarBackgroundColor": "#5492be",
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "天气"
 }
