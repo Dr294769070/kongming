@@ -1,0 +1,16 @@
+@mixin m-r1b($color: #d5d5d5, $radius: 0) {
+    position: relative;
+    &::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 200%;
+        height: 200%;
+        box-sizing: border-box;
+        border: 1px solid $color;
+        border-radius: $radius;
+        transform: scale(0.5); // 2d方向x、y等比缩小为0.5倍
+        transform-origin: 0 0;
+    }
+}

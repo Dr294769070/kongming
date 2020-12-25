@@ -1,0 +1,9 @@
+{
+    "demoList": [
+        {
+            "name": "onePx",
+            "path": "/pages/demos/onePx/main",
+            "icon": "https://frank-1302698468.cos.ap-beijing.myqcloud.com/KM/icons/%E5%83%8F%E7%B4%A0.png"
+        }
+    ]
+}

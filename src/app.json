@@ -6,7 +6,8 @@
     "pages/appEntry/main",
     "pages/sharePoster/main",
     "pages/shareDemo/main",
-    "pages/guideDemo/main"
+    "pages/guideDemo/main",
+    "pages/demoEntry/main"
   ],
   "subPackages": [
     {
@@ -14,6 +15,12 @@
       "pages": [
         "weather/main",
         "citySelect/main"
+      ]
+    },
+    {
+      "root": "pages/demos/",
+      "pages": [
+        "onePx/main"
       ]
     }
   ],
@@ -43,6 +50,12 @@
         {
             "pagePath": "pages/appEntry/main",
             "text": "应用",
+            "iconPath": "./static/tabs/apps.png",
+            "selectedIconPath": "./static/tabs/apps-active.png"
+        },
+        {
+            "pagePath": "pages/demoEntry/main",
+            "text": "演示",
             "iconPath": "./static/tabs/orders.png",
             "selectedIconPath": "./static/tabs/orders-active.png"
         }
