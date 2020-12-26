@@ -20,7 +20,8 @@
     {
       "root": "pages/demos/",
       "pages": [
-        "onePx/main"
+        "onePx/main",
+        "favoritePic/main"
       ]
     }
   ],

@@ -9,13 +9,24 @@
             这里实现了四个边框，如果只有一个边要显示，就用border-top等即可
             考虑到不同设备的DPR不一样，还可以用css3的@media多媒体查询功能，针对不同屏幕应用不同样式
          -->
+        <i-button type="primary" @click="copy">复制文本</i-button>
+        <!-- 复制文本的API 在web浏览器可以创建一个input元素，执行select方法 再使用document对象的复制方法即可 -->
     </div>
 </template>
 <script>
 export default {
-    data() {
-        return {};
-    },
+    methods: {
+        copy() {
+            wx.setClipboardData({
+                data: '复制的文本',
+                success: () => {
+                    wx.showToast({
+                        title: '复制成功'
+                    })
+                }
+            })
+        }
+    }
 };
 </script>
 <style lang="scss" scoped>

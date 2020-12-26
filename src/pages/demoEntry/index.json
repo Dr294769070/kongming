@@ -4,6 +4,11 @@
             "name": "onePx",
             "path": "/pages/demos/onePx/main",
             "icon": "https://frank-1302698468.cos.ap-beijing.myqcloud.com/KM/icons/%E5%83%8F%E7%B4%A0.png"
+        },
+        {
+            "name": "相册",
+            "path": "/pages/demos/favoritePic/main",
+            "icon": "https://frank-1302698468.cos.ap-beijing.myqcloud.com/KM/icons/%E7%9B%B8%E5%86%8C%20(1).png"
         }
     ]
 }

@@ -31,7 +31,7 @@ export default {
 .appEntry{
   box-sizing: border-box;
   padding: 20rpx;
-  display: flex;
+  display: inline-flex;
   flex-wrap: wrap;
   align-items: flex-start;
   justify-content: space-between;
