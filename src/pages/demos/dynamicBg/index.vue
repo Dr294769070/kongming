@@ -1,5 +1,7 @@
 <template>
-    <div class="template"></div>
+    <div class="dynamicBg">
+        <swiper></swiper>
+    </div>
 </template>
 <script>
 export default {
@@ -8,6 +10,6 @@ export default {
     }
 }
 </script>
-<style lang="scss" scoped>
+<style scoped>
 
 </style>

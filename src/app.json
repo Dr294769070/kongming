@@ -14,7 +14,8 @@
       "root": "pages/apps/",
       "pages": [
         "weather/main",
-        "citySelect/main"
+        "citySelect/main",
+        "tossCoin/main"
       ]
     },
     {

@@ -19,6 +19,11 @@
             "name": "天气",
             "path": "/pages/apps/weather/main",
             "icon": "https://frank-1302698468.cos.ap-beijing.myqcloud.com/KM/icons/%E5%A4%A9%E6%B0%94.png"
+        },
+        {
+            "name": "骰子",
+            "path": "/pages/apps/tossCoin/main",
+            "icon": "https://frank-1302698468.cos.ap-beijing.myqcloud.com/KM/icons/%E9%AA%B0%E5%AD%90.png"
         }
     ]
 }
